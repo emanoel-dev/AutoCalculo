@@ -12,7 +12,6 @@ export default class App extends Component {
                         style={styles.logo}
                     />
                     <Text style={styles.title}>{this.props.result < 0.7 ? "Compensa usar Alcool" : "Compensa usar Gasolina"}</Text>
-                    <Text style={styles.title}>{this.props.result}</Text>
                 </View>
                 <View style={styles.content}>
                     <Text style={{color: '#FFF', fontSize: 28, fontWeight: 'bold'}}></Text>
@@ -67,9 +66,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 15
     },
     textoBotao: {
         color: '#BC3908',
         fontSize: 18,
-    }
+    },
 })

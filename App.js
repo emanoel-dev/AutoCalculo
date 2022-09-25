@@ -3,7 +3,8 @@ import {
   Text, 
   View, 
   Image,
-  Modal, 
+  Modal,
+  Keyboard, 
   TextInput,
   StyleSheet,
   TouchableOpacity, 
@@ -18,13 +19,16 @@ export default class App extends Component {
     this.state = {
         alcool: '',
         gasolina: '',
+        alcoolCalc: '',
         result: '',
         statusModal: false,
       };
       this.Calcular = this.Calcular.bind(this);
       this.Fechar = this.Fechar.bind(this);
 }
-Calcular(value) {
+
+Calcular() {
+    Keyboard.dismiss();
     if (this.state.alcool && this.state.gasolina >= 1 ) {
 
       this.setState({statusModal : true});
@@ -37,11 +41,6 @@ Calcular(value) {
 
       this.state.alcool = convertAlcool.toFixed(2);
       this.state.gasolina = convertGasolina.toFixed(2);
-      
-      // toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
-
-      console.log(this.state.alcool);
-      
   } else {
     alert("Preencha todos os campos!");
   }
@@ -51,9 +50,7 @@ Fechar(visible){
   this.setState({statusModal : visible});
 
 }
-
   render() {
-
     return (
       <KeyboardAvoidingView 
       behavior={Platform.OS === "ios" ? "padding" : "height"} // KeyboardAvoidingView faz orietação do teclado aberto em relacao ao sistema operacional iOS/Android
@@ -76,12 +73,10 @@ Fechar(visible){
             <Text style={styles.subTitulo}>Gasolina: Preço por Litro</Text>
             <View style={styles.input}> 
               <TextInput 
-                //placeholder='$ 0.00'
                 onChangeText={(value) => this.setState({gasolina: value})}
                 keyboardType='numeric' 
                 style={{backgroundColor: '#FFF', width: 350, height: 50, borderRadius: 5, fontSize: 18, padding: 5,}}>
               </TextInput>
-
               <TouchableOpacity style={styles.botao}>
                 <Text style={{color: '#FFF', fontSize: 28, fontWeight: 'bold'}} onPress={this.Calcular}>Calcular</Text>
               </TouchableOpacity>
